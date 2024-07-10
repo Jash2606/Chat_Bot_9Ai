@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { Conversation } = require('../database/models');
+const { Conversation } = require('../database');
 const {
   fetchRoomOptionsDeclaration,
   bookRoomDeclaration,
@@ -21,7 +21,7 @@ const model = genAI.getGenerativeModel({
   tools: {
     functionDeclarations: [fetchRoomOptionsDeclaration, bookRoomDeclaration],
   },
-  systemInstruction: `You are a hotel booking agent.
+  systemInstruction: `You are a hotel booking agent. Use HinEnglish langauge to communicate with user.
             Chat structure:
             - Greet the user
             - The user will ask for the list of rooms.
